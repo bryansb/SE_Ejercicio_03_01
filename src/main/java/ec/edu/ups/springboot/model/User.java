@@ -31,7 +31,7 @@ public class User {
 	@Column(name = "use_deleted", columnDefinition = "BOOLEAN DEFAULT 0")
 	private boolean deleted;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
 	private List<Telephone> telephones = new ArrayList<>();
 	
 	public User() {
@@ -84,6 +84,12 @@ public class User {
 
 	public void setTelephones(List<Telephone> telephones) {
 		this.telephones = telephones;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", dni=" + dni + ", name=" + name + ", deleted=" + deleted + ", telephones="
+				+ telephones + "]";
 	}
 	
 }

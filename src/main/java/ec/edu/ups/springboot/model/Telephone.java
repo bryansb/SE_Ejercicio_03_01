@@ -57,6 +57,10 @@ public class Telephone {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Telephone [id=" + id + ", number=" + number + "]";
+	}
+	
 }
