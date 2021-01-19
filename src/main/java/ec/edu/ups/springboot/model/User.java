@@ -28,9 +28,6 @@ public class User {
 	@Column(name = "use_name", length=255, nullable=false)
 	private String name;
 	
-	@Column(name = "use_deleted", columnDefinition = "BOOLEAN DEFAULT 0")
-	private boolean deleted;
-	
 	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
 	private List<Telephone> telephones = new ArrayList<>();
 	
@@ -38,11 +35,10 @@ public class User {
 		
 	}
 
-	public User(String dni, String name, boolean deleted, List<Telephone> telephones) {
+	public User(String dni, String name, List<Telephone> telephones) {
 		super();
 		this.dni = dni;
 		this.name = name;
-		this.deleted = deleted;
 		this.telephones = telephones;
 	}
 
@@ -69,14 +65,6 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public boolean isDeleted() {
-		return deleted;
-	}
-	
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}
 
 	public List<Telephone> getTelephones() {
 		return telephones;
@@ -88,7 +76,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", dni=" + dni + ", name=" + name + ", deleted=" + deleted + ", telephones="
+		return "User [id=" + id + ", dni=" + dni + ", name=" + name + ", telephones="
 				+ telephones + "]";
 	}
 	
