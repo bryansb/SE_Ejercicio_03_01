@@ -25,7 +25,7 @@ public class SeEjercicio0301Application implements CommandLineRunner {
 	private UserRepository userRepository;
 	@Autowired
 	private TelephoneRepository telephoneRepository;
-	private TelephoneController telephoneController;
+//	private TelephoneController telephoneController;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -33,7 +33,6 @@ public class SeEjercicio0301Application implements CommandLineRunner {
 		for (int i = 0; i < 1; i++) {
 			user.setDni("000000000" + i);
 			user.setName("Usuario" + i);
-			user.setDeleted(false);
 		}
 		List<Telephone> telephoneList = new ArrayList<>();
 		Telephone telephone = new Telephone();
