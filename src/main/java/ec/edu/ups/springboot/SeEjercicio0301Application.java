@@ -51,7 +51,6 @@ public class SeEjercicio0301Application implements CommandLineRunner {
 		System.out.println(user);
 		telephone.setNumber("00000000");
 		telephone.setUser(user);
-		this.telephoneRepository.(telephone);
 		System.out.println("Telefono "+telephone);
 		System.out.println("Telefono2 "+telephone2);
 	}
