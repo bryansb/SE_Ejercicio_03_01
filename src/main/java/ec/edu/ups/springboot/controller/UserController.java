@@ -62,9 +62,11 @@ public class UserController {
 	@Autowired
 	private TelephoneRepository telephoneRepository;
 	
-	@GetMapping("/user/telephones/{userId}")
-	public List<Telephone> getTelephones(@PathVariable Integer userId) {
-		return this.telephoneRepository.findByUserId(userId);
+	@GetMapping("/user/telephones/{id}")
+	public List<Telephone> getTelephones(@PathVariable Integer id) {
+		System.out.println("user "+id);
+		List<Telephone> telephones = userRepository.findById(id).get().getTelephones();
+		return telephones;
 	}
 	
 	@PostMapping("/user/telephone/{userId}")
@@ -85,8 +87,13 @@ public class UserController {
 	@PutMapping("/user/telephone/{userId}/{id}")
     public ResponseEntity<Telephone> updateTelephone(@RequestBody Telephone telephone) {
         Telephone result = telephoneRepository.saveAndFlush(telephone);
-        System.out.println("sssssssssssssssssss"+telephone);
         return ResponseEntity.ok().body(result);
+    }
+	
+	@DeleteMapping("/user/telephone/{userId}/{id}")
+    public ResponseEntity<?> deleteTelephone(@PathVariable Integer userId, @PathVariable Integer id) {
+        telephoneRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 	
 }

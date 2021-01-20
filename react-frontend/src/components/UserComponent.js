@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-// import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
 
 
@@ -15,13 +14,9 @@ class UserComponent extends React.Component {
     }
 
     componentDidMount(){
-        // UserService.getUsers().then((response) => {
-        //     this.setState({ users: response.data})
-            
-        // });
         this.setState({isLoading: true});
 
-        fetch('api/users')
+        fetch('/api/users')
             .then(response => response.json())
             .then(data => this.setState({users: data, isLoading: false}));
     }
@@ -48,42 +43,41 @@ class UserComponent extends React.Component {
         }
 
         return (
-            <div className="text-center">
-                
-                <Button size="sm" color="primary" tag={Link} to={"/users/new"}>Crear Usuario</Button>
-                <h1>Lista Usuarios</h1>
-                <Table className="mt-4">
-                    <thead>
-                        <tr>
-                            <th>DNI</th>
-                            <th>Nombre</th>
-                            <th>Gestión</th>
-                            <th>Telefonos</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        {
-                            this.state.users.map(
-                                user =>
-                                <tr key = {user.id}>
-                                    <td>{user.dni}</td>
-                                    <td>{user.name}</td>
-                                    <td>
-                                        <ButtonGroup>
-                                            <Button size="sm" color="primary" tag={Link} to={"/users/" + user.id}>Editar</Button>
-                                            <Button size="sm" color="danger" onClick={() => this.remove(user.id)}>Eliminar</Button>
-                                            
-                                        </ButtonGroup>
-                                    </td>
-                                    <td><Button size="sm" color="primary" tag={Link} to={"/telephones/" + user.id + "/add"}>Mostrar Teléfonos</Button></td>
-                                </tr>
-                            )
-                        }
+            <div className="container m-5 mx-auto">
+                <Button size="sm" color="success" tag={Link} to={"/users/new"} className="float-right">Crear Usuario</Button>
+                <div className="text-center">
+                    <h1>Lista de Usuarios</h1>
+                    <Table className="mt-4">
+                        <thead>
+                            <tr>
+                                <th>Cédula</th>
+                                <th>Nombre</th>
+                                <th>Gestión</th>
+                                <th>Teléfonos</th>
+                            </tr>
+                        </thead>
                         
-                    </tbody>
-                </Table>
-                
+                        <tbody>
+                            {
+                                this.state.users.map(
+                                    user =>
+                                    <tr key = {user.id}>
+                                        <td>{user.dni}</td>
+                                        <td>{user.name}</td>
+                                        <td>
+                                            <ButtonGroup>
+                                                <Button size="sm" color="primary" tag={Link} to={"/users/" + user.id}>Editar</Button>
+                                                <Button size="sm" color="danger" onClick={() => this.remove(user.id)}>Eliminar</Button>
+                                            </ButtonGroup>
+                                        </td>
+                                        <td><Button size="sm" color="primary" tag={Link} to={"/telephones/" + user.id}>Mostrar Teléfonos</Button></td>
+                                    </tr>
+                                )
+                            }
+                            
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         )
     }

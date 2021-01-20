@@ -13,13 +13,13 @@ class App extends Component{
     return (        
       <Router>
         <Switch>
-            {/* <Route path='/' exact={true} component={Home}/> */}
+            <Route path='/' exact={true} component={UserComponent}/>
             <Route path='/users' exact={true} component={UserComponent}/>
             <Route path='/users/new' exact={true} component={UserCreateComponent}/>
             <Route path='/users/:id' component={UserCreateComponent}/>
-            <Route path='/telephones/:userId' exact={true} component={TelephoneComponent}/>
-            <Route path='/telephones/:userId/add' component={TelephoneCreateComponent}/>
-            <Route path='/telephones/:userId/:id' component={TelephoneCreateComponent}/>
+            <Route path='/telephones/:id' component={TelephoneComponent}/>
+            <Route path='/telephone/:userId/add' component={TelephoneCreateComponent}/>
+            <Route path='/telephone/:userId/:id' component={TelephoneCreateComponent}/>
         </Switch>
       </Router>
     );

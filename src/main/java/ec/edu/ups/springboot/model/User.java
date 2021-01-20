@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 @Table(name = "users")
@@ -32,7 +30,7 @@ public class User {
 	private String name;
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Telephone> telephones = new ArrayList<>();
 	
 	public User() {

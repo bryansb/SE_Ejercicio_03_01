@@ -53,18 +53,18 @@ class UserCreateComponent extends React.Component {
         const {item} = this.state;
         const title = <h2>{item.id ? 'Editar Usuario' : 'Agregar Usuario'}</h2>;
     
-        return <div>
+        return <div className="container m-5 mx-auto">
           {/* <AppNavbar/> */}
           <Container>
             {title}
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
-                <Label for="dni">DNI</Label>
+                <Label for="dni">Cédula</Label>
                 <Input type="text" name="dni" id="dni" value={item.dni || ''}
                        onChange={this.handleChange} autoComplete="dni"/>
               </FormGroup>
               <FormGroup>
-                <Label for="name">Name</Label>
+                <Label for="name">Nombre</Label>
                 <Input type="text" name="name" id="name" value={item.name || ''}
                        onChange={this.handleChange} autoComplete="name"/>
               </FormGroup>

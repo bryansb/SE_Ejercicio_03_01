@@ -24,7 +24,6 @@ class telephoneCreateComponent extends React.Component {
         if (this.props.match.params.id !== 'add') {
             const telephone = await (await fetch(`/api/user/telephone/${this.state.userId}/${this.props.match.params.id}`)).json();
             this.setState({item: telephone});
-            // this.state.item.user = telephone;
         }
     }
 
@@ -49,17 +48,15 @@ class telephoneCreateComponent extends React.Component {
           },
           body: JSON.stringify(item),
         });
-        this.props.history.push('/users');
+        this.props.history.push('/telephones/' + this.state.userId);
     }
 
     render() {
         const {item} = this.state;
         const title = <h2>{item.id ? 'Editar Teléfono' : 'Agregar Teléfono'}</h2>;
     
-        return <div>
-          {/* <AppNavbar/> */}
+        return <div className="container m-5 mx-auto">
           <Container>
-            {/* <h2>{userId}</h2> */}
             {title}
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
@@ -69,7 +66,7 @@ class telephoneCreateComponent extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Button color="primary" type="submit">Guardar</Button>{' '}
-                <Button color="secondary" tag={Link} to="/users">Cancelar</Button>
+                <Button color="secondary" tag={Link} to={"/telephones/" + this.state.userId}>Cancelar</Button>
               </FormGroup>
             </Form>
           </Container>
