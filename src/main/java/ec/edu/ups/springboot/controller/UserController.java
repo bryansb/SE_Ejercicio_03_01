@@ -62,11 +62,38 @@ public class UserController {
 	@Autowired
 	private TelephoneRepository telephoneRepository;
 	
-	@GetMapping("/user/telephones/{userId}")
-	public List<Telephone> getTelephones(@PathVariable Integer userId) {
-		return this.telephoneRepository.findByUserId(userId);
+	@GetMapping("/user/telephones/{id}")
+	public List<Telephone> getTelephones(@PathVariable Integer id) {
+		System.out.println("user "+id);
+		List<Telephone> telephones = userRepository.findById(id).get().getTelephones();
+		return telephones;
 	}
 	
+	@PostMapping("/user/telephone/{userId}")
+	public ResponseEntity<Telephone> createTelephone(@RequestBody Telephone telephone, @PathVariable Integer userId) {
+		Optional<User> user = userRepository.findById(userId);
+		telephone.setUser(user.get());
+		Telephone telephoneResponse = telephoneRepository.save(telephone);
+		return new ResponseEntity<Telephone>(telephoneResponse, HttpStatus.OK);
+	}
 	
+	@GetMapping("/user/telephone/{userId}/{id}")
+	public ResponseEntity<Telephone> getTelephone(@PathVariable Integer userId, @PathVariable Integer id) {
+		Optional<Telephone> telephone = telephoneRepository.findById(id);
+		return telephone.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+	
+	@PutMapping("/user/telephone/{userId}/{id}")
+    public ResponseEntity<Telephone> updateTelephone(@RequestBody Telephone telephone) {
+        Telephone result = telephoneRepository.saveAndFlush(telephone);
+        return ResponseEntity.ok().body(result);
+    }
+	
+	@DeleteMapping("/user/telephone/{userId}/{id}")
+    public ResponseEntity<?> deleteTelephone(@PathVariable Integer userId, @PathVariable Integer id) {
+        telephoneRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 	
 }
