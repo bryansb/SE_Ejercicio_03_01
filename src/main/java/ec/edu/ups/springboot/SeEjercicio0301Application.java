@@ -37,21 +37,21 @@ public class SeEjercicio0301Application implements CommandLineRunner {
 		List<Telephone> telephoneList = new ArrayList<>();
 		Telephone telephone = new Telephone();
 		telephone.setNumber("0983232969");
-		System.out.println("Telefono "+telephone);
-		Telephone telephone2 = new Telephone();
-		telephone2.setNumber("0983232958");
-		System.out.println("Telefono2 "+telephone2);
-		telephoneList.add(telephone);
-		telephoneList.add(telephone2);
-		this.telephoneRepository.save(telephone);
-		this.telephoneRepository.save(telephone2);
-		user.setTelephones(telephoneList);
+//		System.out.println("Telefono "+telephone);
+//		Telephone telephone2 = new Telephone();
+//		telephone2.setNumber("0983232958");
+//		System.out.println("Telefono2 "+telephone2);
+//		telephoneList.add(telephone);
+//		telephoneList.add(telephone2);
+//		this.telephoneRepository.save(telephone);
+//		this.telephoneRepository.save(telephone2);
+//		user.setTelephones(telephoneList);
 		this.userRepository.save(user);
-		System.out.println(user);
-		telephone.setNumber("00000000");
+//		System.out.println(user);
+//		telephone.setNumber("00000000");
 		telephone.setUser(user);
-//		this.telephoneRepository.save(telephone);	
+		this.telephoneRepository.save(telephone);	
 		System.out.println("Telefono "+telephone);
-		System.out.println("Telefono2 "+telephone2);
+//		System.out.println("Telefono2 "+telephone2);
 	}
 }

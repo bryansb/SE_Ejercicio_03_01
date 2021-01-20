@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "telephones")
 public class Telephone {
@@ -23,6 +26,7 @@ public class Telephone {
 	
 	@ManyToOne
 	@JoinColumn
+//	@JsonManagedReference
 	private User user;
 
 	public Telephone() {

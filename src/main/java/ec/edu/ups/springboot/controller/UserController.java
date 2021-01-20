@@ -67,6 +67,26 @@ public class UserController {
 		return this.telephoneRepository.findByUserId(userId);
 	}
 	
+	@PostMapping("/user/telephone/{userId}")
+	public ResponseEntity<Telephone> createTelephone(@RequestBody Telephone telephone, @PathVariable Integer userId) {
+		Optional<User> user = userRepository.findById(userId);
+		telephone.setUser(user.get());
+		Telephone telephoneResponse = telephoneRepository.save(telephone);
+		return new ResponseEntity<Telephone>(telephoneResponse, HttpStatus.OK);
+	}
 	
+	@GetMapping("/user/telephone/{userId}/{id}")
+	public ResponseEntity<Telephone> getTelephone(@PathVariable Integer userId, @PathVariable Integer id) {
+		Optional<Telephone> telephone = telephoneRepository.findById(id);
+		return telephone.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+	
+	@PutMapping("/user/telephone/{userId}/{id}")
+    public ResponseEntity<Telephone> updateTelephone(@RequestBody Telephone telephone) {
+        Telephone result = telephoneRepository.saveAndFlush(telephone);
+        System.out.println("sssssssssssssssssss"+telephone);
+        return ResponseEntity.ok().body(result);
+    }
 	
 }
